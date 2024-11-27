@@ -1,0 +1,45 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\title{Coverage Path Planning Algorithm -  QGC Approach}
+\author{Ariel Guerrero}
+\date{\today}
+\maketitle
+
+\section*{Algorithm}
+\begin{algorithm}
+\caption{Generate Transects: \texttt{generateTransects}($\mathcal{P}$, $\theta$, $s$)}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Polygon points $\mathcal{P}$ (Nx2 matrix), grid angle $\theta$ (degrees), grid spacing $s$ (meters)
+\State \textbf{Output:} Transects $\mathcal{T}$, rotated polygon $\mathcal{P}_{rot}$
+\State
+\State $\theta \gets \texttt{deg2rad}(\theta)$
+\State $\mathbf{R} \gets \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix}$
+\State $\mathcal{P}_{rot} \gets \mathbf{R} \cdot \mathcal{P}^T$
+\State
+\State $\texttt{minX} \gets \min(\mathcal{P}_{rot}(:,1))$
+\State $\texttt{maxX} \gets \max(\mathcal{P}_{rot}(:,1))$
+\State $\texttt{minY} \gets \min(\mathcal{P}_{rot}(:,2))$
+\State $\texttt{maxY} \gets \max(\mathcal{P}_{rot}(:,2))$
+\State
+\State $\mathcal{T} \gets \emptyset$
+\State $\texttt{lines\_x} \gets (\texttt{minX} - 2s):s:(\texttt{maxX} + 2s)$
+\For{$x \in \texttt{lines\_x}$}
+    \State $\mathbf{l} \gets \begin{bmatrix} x & \texttt{minY} - 2s \\ x & \texttt{maxY} + 2s \end{bmatrix}$
+    \State $\mathcal{T} \gets \mathcal{T} \cup \{\mathbf{R}^{-1} \cdot \mathbf{l}^T\}$
+\EndFor
+\State
+\State \textbf{return} $\mathcal{T}, \mathcal{P}_{rot}$
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

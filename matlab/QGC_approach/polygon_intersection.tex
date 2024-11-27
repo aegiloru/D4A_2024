@@ -1,0 +1,55 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\title{Polygon Intersection Algorithm - QGC Approach}
+\author{Ariel Guerrero}
+\date{\today}
+\maketitle
+
+\section*{Algorithm}
+\begin{algorithm}
+\caption{Intersect Lines with Polygon: \texttt{intersectLinesWithPolygon}($\mathcal{L}$, $\mathcal{P}$)}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Lines $\mathcal{L}$, polygon $\mathcal{P}$
+\State \textbf{Output:} Transects $\mathcal{T}$
+\State
+\State $\mathcal{T} \gets \emptyset$
+\For {each $\mathbf{l} \in \mathcal{L}$}
+    \State $\mathbf{l}_{int} \gets \texttt{intersectLinePolygon}(\mathbf{l}, \mathcal{P})$
+    \If {$\mathbf{l}_{int} \neq \emptyset$}
+        \State $\mathcal{T} \gets \mathcal{T} \cup \{\mathbf{l}_{int}\}$
+    \EndIf
+\EndFor
+\State
+\State \textbf{return} $\mathcal{T}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Intersect Line with Polygon: \texttt{intersectLinePolygon}($\mathbf{l}$, $\mathcal{P}$)}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Line $\mathbf{l}$, polygon $\mathcal{P}$
+\State \textbf{Output:} Intersected line $\mathbf{l}_{int}$
+\State
+\State $\mathbf{l}_{int} \gets \emptyset$
+\For {each edge $\mathbf{p}_i, \mathbf{p}_{i+1} \in \mathcal{P}$}
+    \State $[\mathbf{x}_i, \mathbf{y}_i] \gets \texttt{polyxpoly}([\mathbf{l}_{1x}, \mathbf{l}_{2x}], [\mathbf{l}_{1y}, \mathbf{l}_{2y}], [\mathbf{p}_{ix}, \mathbf{p}_{i+1x}], [\mathbf{p}_{iy}, \mathbf{p}_{i+1y}])$
+    \If {$(\mathbf{x}_i \neq \emptyset) \land (\mathbf{y}_i \neq \emptyset)$}
+        \State $\mathbf{l}_{int} \gets \mathbf{l}_{int} \cup [\mathbf{x}_i, \mathbf{y}_i]$
+    \EndIf
+\EndFor
+\State
+\State \textbf{return} $\mathbf{l}_{int}$
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
