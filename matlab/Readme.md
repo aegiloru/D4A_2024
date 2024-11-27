@@ -1,1 +1,1 @@
-Coverage Path Planning Algorithm - QGC Approach
+Coverage Path Planning Algorithm 
