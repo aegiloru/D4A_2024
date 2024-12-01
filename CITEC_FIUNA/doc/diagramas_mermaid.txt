@@ -1,0 +1,97 @@
+Diagramas en Mermaid - Servicio en linea
+
+https://www.mermaidchart.com/
+Copiar y pegar el codigo para generar las imágenes
+
+//Diagrama de clases
+
+classDiagram
+    class System {
+        +connect(system_address: str) void
+        +core.connection_state() async iterator
+        +telemetry.health() async iterator
+        +mission.set_return_to_launch_after_mission(bool) void
+        +mission.upload_mission(MissionPlan) void
+        +mission.start_mission() void
+        +action.arm() void
+    }
+
+    class MissionItem {
+        -latitude: float
+        -longitude: float
+        -relative_altitude: float
+        -speed: float
+        -is_fly_through: bool
+        -gimbal_pitch: float
+        -gimbal_yaw: float
+        -camera_action: CameraAction
+        -param1: float
+        -param2: float
+        -param3: float
+        -param4: float
+        -param5: float
+        -vehicle_action: VehicleAction
+    }
+
+    class MissionPlan {
+        -mission_items: list[MissionItem]
+    }
+
+    System --> MissionPlan : uses
+    MissionPlan *-- MissionItem : contains
+
+//Diagrama de secuencias
+sequenceDiagram
+    participant drone
+    participant System
+    participant MissionItem
+    participant MissionPlan
+
+    drone->>System: run()
+    System->>System: connect()
+    System-->>drone: print("Esperando la conexion al drone...")
+    System->>System: create MissionItems
+    System->>MissionItem: Add waypoint (-25.2942278, -57.490408333333335)
+    System->>MissionItem: Add waypoint (-25.2938389, -57.49028611111111)
+    System->>MissionItem: Add waypoint (-25.2938278, -57.489850000000004)
+    System->>MissionItem: Add waypoint (-25.2942028, -57.489891666666665)
+    System->>MissionItem: Add waypoint (-25.2944306, -57.49010555555556)
+    System->>MissionPlan: upload_mission(mission_plan)
+    System-->>drone: print("-- Actualizando el plan de vuelo (mision)")
+    System->>System: check_position_estimation()
+    System-->>drone: print("-- Estimación de posición global OK")
+    System->>System: arm()
+    System-->>drone: print("-- Armado")
+    System->>System: start_mission()
+    System-->>drone: print("-- Iniciando el plan de vuelo")
+
+    loop Progreso de la misión
+        System->>System: Check mission progress
+        System-->>drone: print("Progreso del plan de vuelo")
+    end
+
+    alt Drone está volando
+        System->>System: in_air = True
+    else Drone aterriza
+        System->>System: in_air = False
+        System->>drone: Tareas completadas
+    end
+
+    drone->>System: Terminar ejecución
+
+// Diagrama de actividades
+stateDiagram-v2
+    [*] --> EsperarConexion
+    EsperarConexion: Esperando la conexión al dron
+    EsperarConexion --> Conectado: Dron conectado
+    Conectado --> CrearMissionItems: Crear elementos de misión
+    CrearMissionItems --> SubirMision: Subir el plan de vuelo
+    SubirMision: Actualizando el plan de vuelo (misión)
+    SubirMision --> ComprobarPosicionGlobal: Comprobando estimación global
+    ComprobarPosicionGlobal --> Armado: Posición global OK
+    Armado: Armando el dron
+    Armado --> IniciarVuelo: Iniciar el plan de vuelo
+    IniciarVuelo: Comenzando la misión
+    IniciarVuelo --> MonitorearVuelo: Monitorear progreso de la misión
+    MonitorearVuelo --> Terminar: Misión completada
+    Terminar --> [*]
