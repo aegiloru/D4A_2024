@@ -1,28 +1,49 @@
-# Proyecto de Drones - Misión Autonóma
+# Proyecto de Drones - Misión Autónoma
 
-Este repositorio contiene los detalles de un vuelo autónomo realizado con el dron **Holybro X500 V2**, utilizando PX4 y QGroundControl.
+Este repositorio documenta los datos y análisis de un vuelo autónomo realizado con el dron **Holybro X500 V2**, utilizando PX4 y QGroundControl. Se incluyen detalles de la misión, análisis, y los datos crudos generados durante la operación.
 
 ---
 
-## 📹 Video de la misión
+## 📹 Videos de la misión
 
-Aquí puedes ver un video de la misión autónoma:
+A continuación, se presentan los videos capturados durante la misión autónoma:
 
-[![Video de la misión](ruta/a/imagen_previa.png)](ruta/del/video.mp4 "Haz clic para ver el video")
+1. **Prueba de vuelo**  
+   [![PRB-01-FligthTest](PRB-01-FligthTest.mp4)](PRB-01-FligthTest.mp4 "Haz clic para ver el video de la prueba de vuelo")
 
-> Nota: Si haces clic en la imagen, el video se reproducirá o se descargará dependiendo del navegador.
+2. **Registro en QGroundControl**  
+   [![PRB-01-QGC](PRB-01-QGC.mp4)](PRB-01-QGC.mp4 "Haz clic para ver el video del registro en QGC")
+
+3. **Vista general**  
+   [![PRB-01-UC](PRB-01-UC.mp4)](PRB-01-UC.mp4 "Haz clic para ver el video de la vista general")
+
+> **Nota**: Dependiendo del navegador, los videos pueden reproducirse o descargarse.
 
 ---
 
 ## 📂 Estructura del repositorio
 
-- `misionLED.py`: Script utilizado para cargar los waypoints.
+El directorio `PRB_01` contiene los siguientes archivos:
+
+- `PRB-01-FligthTest.mp4`: Video del vuelo autónomo.
+- `PRB-01-QGC.mp4`: Registro visual desde QGroundControl.
+- `PRB-01-UC.mp4`: Video de la vista general de la misión.
+- `log_13_2024-8-6-15-37-58.ulg`: Archivo de log crudo en formato `.ulg`.
+- `log_13_2024-8-6-15-37-58.kml`: Archivo de log exportado para análisis en Google Earth.
+- `Readme.MD`: Documento descriptivo de la misión.
+- `.gitattributes`: Configuración de Git LFS para manejar archivos grandes.
 
 ---
 
 ## 📈 Análisis del vuelo
 
-Puedes encontrar un análisis detallado del vuelo en [Flight Review](https://review.px4.io/plot_app?log=5086c7d8-113d-4358-868f-3d71cb6cbb9f).
+Un análisis detallado del vuelo está disponible en la herramienta [Flight Review](https://review.px4.io/plot_app?log=5086c7d8-113d-4358-868f-3d71cb6cbb9f), donde se pueden observar datos como:
+
+- **Distancia recorrida**: 98.8 m.
+- **Velocidad promedio**: 1.55 m/s (5.6 km/h).
+- **Velocidad máxima**: 5.28 m/s (19.0 km/h).
+- **Diferencia máxima de altitud**: 7 m.
+- **Ángulo máximo de inclinación**: 22.9°.
 
 ---
 
@@ -41,10 +62,13 @@ Puedes encontrar un análisis detallado del vuelo en [Flight Review](https://rev
 
 - **Hardware**: Holybro X500 V2
 - **Software**: PX4 v1.14.3, NuttX v11.0.0
-- **Análisis**: Flight Review
+- **Análisis**: Flight Review, Google Earth Pro
+- **Generación de trayectorias**:
+  - MATLAB UAV Toolbox
+  - SurveyComplexItem.cc (QGroundControl)
 
 ---
 
 ## 📧 Contacto
 
-Si tienes alguna pregunta o sugerencia, no dudes en contactarme.
+Si tienes alguna pregunta o sugerencia sobre este proyecto, no dudes en contactarme. 
