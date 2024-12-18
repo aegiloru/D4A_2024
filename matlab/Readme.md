@@ -1,1 +1,0 @@
-Coverage Path Planning Algorithm 
