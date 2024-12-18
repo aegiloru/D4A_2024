@@ -1,0 +1,2 @@
+Media del error (sin NaN): 0.193386
+Desviación estándar del error (sin NaN): 0.300207
