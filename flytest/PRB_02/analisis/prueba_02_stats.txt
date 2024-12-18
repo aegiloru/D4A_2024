@@ -1,0 +1,3 @@
+Resumen de Errores:
+Media del error: 0.62 m
+Desviación estándar del error: 0.60 m
