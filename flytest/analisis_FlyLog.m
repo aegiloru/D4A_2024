@@ -7,8 +7,8 @@
 %% 1. Cargar archivo ULog
 
 % Prb 01 - Vuelo a 3 waypoints
-ulogFile = 'log_13_2024-8-6-15-37-58.ulg';
-baseName = 'prueba_01';  % Nombre base para guardar los archivos
+% ulogFile = 'log_13_2024-8-6-15-37-58.ulg';
+% baseName = 'prueba_01';  % Nombre base para guardar los archivos
 
 % Prb 02 - CPP generado por Matlab
 % ulogFile = 'log_14_2024-8-6-15-44-48.ulg';
@@ -17,6 +17,10 @@ baseName = 'prueba_01';  % Nombre base para guardar los archivos
 % Prueba no valida
 % ulogFile = 'log_15_2024-8-6-15-57-04.ulg';
 % baseName = 'prueba_03';   % Nombre base para guardar los archivos
+
+% Prb 04 - uavMOSA-SITL
+ulogFile = 'log_1_2024-12-18-04-34-58.ulg';
+baseName = 'prueba_04';  % Nombre base para guardar los archivos
 
 ulogObj = ulogreader(ulogFile);
 
